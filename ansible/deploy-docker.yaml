@@ -1,6 +1,6 @@
 ---
 - name: wait for ssh availability
-  hosts: all
+  hosts: aws_ec2
   gather_facts: no
   tasks:
     - name: Wait for SSH to come up
@@ -15,7 +15,7 @@
 
 
 - name: setup and install docker
-  hosts: docker_server
+  hosts: aws_ec2
   become: yes
   #become_user: root # not needed as become user is root by default
   tasks: 
@@ -68,7 +68,7 @@
     #   when: docker_compose_v2_status.rc == 0
     
 - name: add docker user
-  hosts: docker_server
+  hosts: aws_ec2
   become: yes
   become_user: root
   tasks:
@@ -82,7 +82,7 @@
 
 
 - name: start docker docker_server
-  hosts: docker_server
+  hosts: aws_ec2
   vars_files:
     - vars
   vars_prompt:

@@ -17,6 +17,7 @@ override.tf.json
 ansible.log
 *.vault
 .vault_pass
+*ansible.cfg
 
 # Sensitive files
 vars

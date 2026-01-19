@@ -148,23 +148,23 @@ resource "aws_instance" "myapp-ec2-instance" {
 
 }
 
-resource "null_resource" "configure_server" {
-  triggers = {
-    instance_id = aws_instance.myapp-ec2-instance.id
-  }
+# resource "null_resource" "configure_server" {
+#   triggers = {
+#     instance_id = aws_instance.myapp-ec2-instance.id
+#   }
 
-  provisioner "local-exec" {
-    working_dir = "${path.module}/../ansible"
-    interpreter = ["/bin/bash", "-c"]
-    command     = "printf '[docker_server]\n${aws_instance.myapp-ec2-instance.public_ip}\n\n[docker_server:vars]\nansible_ssh_private_key_file=${var.private_key_path}\nansible_user=ec2-user\n' > hosts && sleep 30 && ansible-playbook deploy-docker.yaml"
-  }
-}
+#   provisioner "local-exec" {
+#     working_dir = "${path.module}/../ansible"
+#     interpreter = ["/bin/bash", "-c"]
+#     command     = "printf '[docker_server]\n${aws_instance.myapp-ec2-instance.public_ip}\n\n[docker_server:vars]\nansible_ssh_private_key_file=${var.private_key_path}\nansible_user=ec2-user\n' > hosts && sleep 30 && ansible-playbook deploy-docker.yaml"
+#   }
+# }
 
 output "ec2-instance-public-ip" {
   value = aws_instance.myapp-ec2-instance.public_ip
 }
 
-output "ansible_command" {
-  value = "cd ../ansible && ansible-playbook deploy-docker.yaml"
-}
+# output "ansible_command" {
+#   value = "cd ../ansible && ansible-playbook deploy-docker.yaml"
+# }
 
