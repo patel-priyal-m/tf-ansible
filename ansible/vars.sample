@@ -1,0 +1,4 @@
+version: 1.0.0
+docker_username: your_docker_username
+docker_password: "your_docker_pat_or_password"
+docker_registry_url: https://index.docker.io/v1
